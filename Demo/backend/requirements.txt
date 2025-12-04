@@ -1,0 +1,17 @@
+fastapi
+uvicorn
+pydantic
+langgraph
+langchain
+anthropic
+streamlit
+pandas
+numpy
+faker
+python-multipart
+httpx
+python-jose[cryptography]
+# passlib[bcrypt]==1.7.4
+python-dateutil
+langchain_openai
+dotenv
