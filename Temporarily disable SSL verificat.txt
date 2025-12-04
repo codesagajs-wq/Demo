@@ -1,0 +1,22 @@
+# Temporarily disable SSL verification
+requests.get = lambda *args, **kwargs: requests.api.get(*args, verify=False, **kwargs)
+
+
+======
+
+Another version:
+
+import requests
+from requests.packages.urllib3.exceptions import InsecureRequestWarning
+
+# Disable SSL warnings
+requests.packages.urllib3.disable_warnings(InsecureRequestWarning)
+
+# Patch requests.Session to ignore SSL globally
+_old_request = requests.Session.request
+
+def _request_no_ssl(self, *args, **kwargs):
+    kwargs['verify'] = False  # disable SSL verification
+    return _old_request(self, *args, **kwargs)
+
+requests.Session.request = _request_no_ssl
